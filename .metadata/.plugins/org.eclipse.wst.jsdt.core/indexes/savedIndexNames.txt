@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Repositorios\jogoDaVelha\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3692731482.index
+352169891.index
+2068996154.index
+1714205260.index
+228064632.index
+1346532553.index

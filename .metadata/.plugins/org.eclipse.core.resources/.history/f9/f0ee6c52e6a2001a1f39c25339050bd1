@@ -1,0 +1,123 @@
+package Jogo.Servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/JogoDaVelhaServlet")
+public class JogoDaVelhaServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+ 
+    public JogoDaVelhaServlet() {
+
+    }
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		String Matriz [][] = new String[3][3];
+		String j0x0 = new String();
+		String j0x1 = new String();
+		String j0x2 = new String();
+		String j1x0 = new String();
+		String j1x1 = new String();
+		String j1x2 = new String();
+		String j2x0 = new String();
+		String j2x1 = new String();
+		String j2x2 = new String();
+
+		
+		Matriz[0][0] = request.getParameter( "0x0" );
+		Matriz[0][1] = request.getParameter( "0x1" );
+		Matriz[0][2] = request.getParameter( "0x2" );
+		Matriz[1][0] = request.getParameter( "1x0" );
+		Matriz[1][1] = request.getParameter( "1x1" );
+		Matriz[1][2] = request.getParameter( "1x2" );
+		Matriz[2][0] = request.getParameter( "2x0" );
+		Matriz[2][1] = request.getParameter( "2x1" );
+		Matriz[2][2] = request.getParameter( "2x2" );
+		
+		/*Matriz[0][0] = j0x0;
+		Matriz[0][1] = j0x1;
+		Matriz[0][2] = j0x2;
+		Matriz[1][0] = j1x0;
+		Matriz[1][1] = j1x1;
+		Matriz[1][2] = j1x2;
+		Matriz[2][0] = j2x0;
+		Matriz[2][1] = j2x1;
+		Matriz[2][2] = j2x2; */
+		
+		out.println("<!DOCTYPE html>");
+        out.println("<html>"); 
+        out.println("<head>");
+   
+        out.println("<meta charset='UTF-8'/>");
+       
+        out.println("</head>");
+      
+        out.println("<body>");
+        out.println("<center>");
+        out.println("<form>");
+        
+        out.println("<table>");
+		out.println("<thead>");
+        out.println("<tr>");
+        
+        out.println("<th>AA");
+        out.println("</th>");
+        
+        out.println("<th>BB");
+        out.println("</th>");
+        out.println("<th>CC");
+        out.println("</th>");
+        
+		out.println("</tr>");
+		out.println("<thead>");
+		
+		out.println("<tbody>");
+		
+		out.println("<tr>");
+		out.println("<td><input type='text' name='0x0' value='" + Matriz[0][0]+"'></td>");
+		out.println("<td><input type='text' name='0x1'value='" + Matriz[0][1]+"'></td>");
+		out.println("<td><input type='text' name='0x2' value='" + Matriz[0][2]+"'></td>");
+		out.println("</tr>");
+		
+		out.println("<tr>");
+		out.println("<td><input type='text' name='1x0' value='" + Matriz[1][0]+"'></td>");
+		out.println("<td><input type='text' name='1x1'value='" + Matriz[1][1]+"'></td>");
+		out.println("<td><input type='text' name='1x2' value='" + Matriz[1][2]+"'></td>");
+		out.println("</tr>");
+		
+		out.println("<tr>");
+		out.println("<td><input type='text' name='2x0' value='" + Matriz[2][0]+"'></td>");
+		out.println("<td><input type='text' name='2x1'value='" + Matriz[2][1]+"'></td>");
+		out.println("<td><input type='text' name='2x2' value='" + Matriz[2][2]+"'></td>");
+		out.println("</tr>");
+		
+		out.println("</tbody>");
+        
+		out.println("</table>");
+		out.println("<button type='submit' >Jogar</button>");
+		out.println("</form>");
+		out.println("</center>");
+        out.println("</body>"); 
+		
+		
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	}
+
+}
