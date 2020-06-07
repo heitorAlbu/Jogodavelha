@@ -33,7 +33,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		String Matriz [][] = new String[3][3];
 		List<String> jogadasDisponiveis = new   ArrayList<String>();
 		
-		String j0x0 = new String();
+		String c0x0 = request.getParameter("cachorro");
 		String j0x1 = new String();
 		String j0x2 = new String();
 		String j1x0 = new String();
@@ -54,11 +54,42 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		Matriz[2][1] = request.getParameter( "2x1" );
 		Matriz[2][2] = request.getParameter( "2x2" );
 		
+		//String classe = request.("class").toString();
+		
 		Boolean vitoriaJogador = regras.verificaVitoria(Matriz, "X");
 		
 		 if(vitoriaJogador == true) {
 			 
-			 String b = "";
+				out.println("<!DOCTYPE html>");
+		        out.println("<html>"); 
+		        out.println("<head>");
+		        out.println("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>");
+		        out.println("<title>Jogo da  Velha </title>");
+		        out.println("<style>");
+		        out.println("h3{");
+		        out.println("font-size: 100px;");
+		        out.println("font-family: Arial, Helvetica, sans-serif;");
+		        out.println("color:green;");
+		        out.println("}");
+		        out.println("button{");
+		        out.println("font-size: 40px;");
+		        out.println("border-color:#68b465;");
+		        out.println("background:linear-gradient(to bottom, #abd5aa 5%, #68b465  100%);");
+		        out.println("box-shadow:inset 0px 1px 0px 0px #e3f1e3;");
+		        out.println("text-shadow:0px 1px 0px #528009;");
+		        out.println("width: 220px;");
+		        out.println("height: 90px;");
+		        out.println("}");
+		            
+		        out.println("</style>");
+		        out.println("</head>");
+		        out.println("<body>");
+		        out.println("<center>");
+		        out.println("<h3> Parabéns, você venceu! </h3>");
+		        out.println("<button ><a href='http://localhost:8080/Jogo/Home.html'> Jogar novamente </a></button>");
+		        out.println("</center>");
+		        out.println("</body>");
+		        out.println("</html>");
 			 
 		 }
 		
@@ -87,66 +118,191 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		
 		if(vitoriaPC == true ) {
 			
-			String a  ="";
+			out.println("<!DOCTYPE html>");
+	        out.println("<html>"); 
+	        out.println("<head>");
+	        out.println("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>");
+	        out.println("<title>Jogo da  Velha </title>");
+	        out.println("<style>");
+	        out.println("h3{");
+	        out.println("font-size: 100px;");
+	        out.println("font-family: Arial, Helvetica, sans-serif;");
+	        out.println("color:red;");
+	        out.println("}");
+	        out.println("button{");
+	        out.println("font-size: 40px;");
+	        out.println("border-color:#68b465;");
+	        out.println("background:linear-gradient(to bottom, #abd5aa 5%, #68b465  100%);");
+	        out.println("box-shadow:inset 0px 1px 0px 0px #e3f1e3;");
+	        out.println("text-shadow:0px 1px 0px #528009;");
+	        out.println("width: 220px;");
+	        out.println("height: 90px;");
+	        out.println("}");
+	            
+	        out.println("</style>");
+	        out.println("</head>");
+	        out.println("<body>");
+	        out.println("<center>");
+	        out.println("<h3> Infelizmente, o computador venceu... </h3>");
+	        out.println("<button ><a href='http://localhost:8080/Jogo/Home.html'> Jogar novamente </a></button>");
+	        out.println("</center>");
+	        out.println("</body>");
+	        out.println("</html>");
+	        
+	        
 		}
 		
+		if(vitoriaJogador == false && vitoriaPC == false) {
+			out.println("<!DOCTYPE html>");
+	        out.println("<html>"); 
+	        out.println("<head>");
+	   
+	        out.println("<meta charset='UTF-8'/>");
+	        out.println("<title>Jogo da  Velha </title>");
+	        
+	        out.println("<style>");
+	        out.println(".selecionadoPc{");
+	        out.println("color: red;");
+	        out.println("}");
+	        out.println("h3{");
+	        out.println("font-size: 100px;");
+	        out.println("font-family: Arial, Helvetica, sans-serif;");
+	        out.println("}");
+	        out.println("input{");
+	        out.println("border-radius:20px;");
+	        out.println("background: #d0f5cd;");
+	        out.println("width: 220px;");
+	        out.println("height: 150px;");
+	        out.println("font-size:100px;");
+	        out.println("}");
+	        out.println("button{");
+	        out.println("font-size: 40px;");
+	        out.println("border-color:#68b465;");
+	        out.println("background:linear-gradient(to bottom, #abd5aa 5%, #68b465  100%);");
+	        out.println("box-shadow:inset 0px 1px 0px 0px #e3f1e3;");
+	        out.println("text-shadow:0px 1px 0px #528009;");
+	        out.println("width: 120px;");
+	        out.println("height: 60px;");
+	        out.println("}");
+	        out.println("</style>");
+	       
+	        
+	        out.println("</head>");
+	      
+	        out.println("<body>");
+	        out.println("<center>");
+	        out.println("<h3>Jogo da Velha</h3>");
+	        out.println("<form>");
+	        
+	        out.println("<table>");
+			out.println("<thead>");
+	        out.println("<tr>");
+	        
+	        out.println("<th>");
+	        out.println("</th>");
+	        
+	        out.println("<th>");
+	        out.println("</th>");
+	        out.println("<th>");
+	        out.println("</th>");
+	        
+			out.println("</tr>");
+			out.println("<thead>");
+			
+			out.println("<tbody>");
+			
+			out.println("<tr>");
+			out.println("<td><input type='text' name='0x0' id='0x0' value='" + Matriz[0][0]+"' style='text-align: center;' autocomplete='off' readonly></td>");
+			out.println("<td><input type='text' name='0x1' id='0x1' value='" + Matriz[0][1]+"' style='text-align: center;' autocomplete='off' readonly></td>");
+			out.println("<td><input type='text' name='0x2' id='0x2' value='" + Matriz[0][2]+"' style='text-align: center;' autocomplete='off' readonly></td>");
+			out.println("</tr>");
+			
+			out.println("<tr>");
+			out.println("<td><input type='text' name='1x0' id='1x0' value='" + Matriz[1][0]+"' style='text-align: center;' autocomplete='off' readonly></td>");
+			out.println("<td><input type='text' name='1x1' id='1x1' value='" + Matriz[1][1]+"' style='text-align: center;' autocomplete='off' readonly></td>");
+			out.println("<td><input type='text' name='1x2' id='1x2' value='" + Matriz[1][2]+"' style='text-align: center;' autocomplete='off' readonly></td>");
+			out.println("</tr>");
+			
+			out.println("<tr>");
+			out.println("<td><input type='text' name='2x0' id='2x0' value='" + Matriz[2][0]+"' style='text-align: center;' autocomplete='off' readonly></td>");
+			out.println("<td><input type='text' name='2x1' id='2x1' value='" + Matriz[2][1]+"' style='text-align: center;' autocomplete='off' readonly></td>");
+			out.println("<td><input type='text' name='2x2' id='2x2' value='" + Matriz[2][2]+"' style='text-align: center;' autocomplete='off' readonly></td>");
+			out.println("</tr>");
+			
+			out.println("</tbody>");
+	        
+			out.println("</table>");
+			out.println("<button type='submit' >Jogar</button>");
+			
+			out.println("<input type='text' name='vazio' id='vazio' value='vazio' style='text-align: center;' autocomplete='off' readonly hidden>");
+			out.println("</form>");
+			out.println("</center>");
+			
+			 
+	        out.println("<script type='text/javascript'>");
+	        out.println("var t1 = document.getElementsByClassName('t1');");
+	        out.println("var celulas = document.getElementsByTagName('input')");
+	        out.println("var clickFlag = '';");
+	        out.println("var ultimajogada ='' ;");
+	        out.println("window.onload = function(){");
+	        out.println("ultimajogada = document.getElementById('vazio');");
+	        out.println("for(var i = 0; 1 < celulas.length; i ++){");
+	        out.println("if(celulas[i].value == 'O'){");
+	        out.println("celulas[i].classList.add('selecionadoPc');");
+	        out.println("}");
+	        out.println("if(celulas[i].value == 'X'){");
+	        out.println("celulas[i].classList.add('selecionado');");
+	        out.println("}");
+	        out.println("}");
+	        out.println("}");
+	        out.println("for(var index = 0; 1 < celulas.length; index ++){");
+	        out.println("celulas[index].addEventListener('click', function(){");
+	        out.println("var elemento = document.getElementById(this.id);");
+	        out.println("if(ultimajogada.id !== elemento.id && !this.classList.contains('selecionadoPc')){");
+	        out.println("ultimajogada.classList.remove('selecionado');");
+	        out.println("ultimajogada.value ='';");
+	        out.println("ultimajogada = elemento;");
+	        out.println("}");
+	        out.println("if(!elemento.classList.contains('selecionado') && (!elemento.classList.contains('selecionadoPc'))){");
+	        out.println("elemento.value = 'X';");
+	        out.println("this.classList.add('selecionado')");
+	        out.println("}");
+	        out.println("else if(elemento.classList.contains('selecionadoPc')){}");
+	        out.println("else{");
+	        out.println("this.classList.remove('selecionado')");
+	        out.println("elemento.value = '';");
+	        out.println("}");
+	        out.println("clickFlag = 'click';");
+	        out.println("})");
+	        out.println("celulas[index].addEventListener('mouseover', function(){");
+	        out.println("var elemento = document.getElementById(this.id);");
+	        out.println("if(!elemento.classList.contains('selecionado') && (!elemento.classList.contains('selecionadoPc'))){");
+	        out.println("elemento.value = 'X';");
+	        out.println("}");
+	        out.println("clickFlag = '';");
+	        out.println("})");
+	        out.println("celulas[index].addEventListener('mouseleave', function(){");
+	        out.println("var elemento = document.getElementById(this.id);");
+	        out.println("if(!elemento.classList.contains('selecionado') && (!elemento.classList.contains('selecionadoPc'))){");
+	        out.println("if(!clickFlag == 'click' || clickFlag == ''){");
+	        out.println("elemento.value = '';");
+	        out.println("}");
+	        out.println("}");
+	        out.println("})");
+	        out.println("}");
+	      
+	        
+	        
+	        
+	        out.println("</script>");
+			
+	        out.println("</body>"); 
+	        out.println("</html>"); 
+			
+			
+		}
 		
-		out.println("<!DOCTYPE html>");
-        out.println("<html>"); 
-        out.println("<head>");
-   
-        out.println("<meta charset='UTF-8'/>");
-       
-        out.println("</head>");
-      
-        out.println("<body>");
-        out.println("<center>");
-        out.println("<h3>Jogo da Velha</h3>");
-        out.println("<form>");
-        
-        out.println("<table>");
-		out.println("<thead>");
-        out.println("<tr>");
-        
-        out.println("<th>AA");
-        out.println("</th>");
-        
-        out.println("<th>BB");
-        out.println("</th>");
-        out.println("<th>CC");
-        out.println("</th>");
-        
-		out.println("</tr>");
-		out.println("<thead>");
-		
-		out.println("<tbody>");
-		
-		out.println("<tr>");
-		out.println("<td><input type='text' name='0x0' value='" + Matriz[0][0]+"'></td>");
-		out.println("<td><input type='text' name='0x1'value='" + Matriz[0][1]+"'></td>");
-		out.println("<td><input type='text' name='0x2' value='" + Matriz[0][2]+"'></td>");
-		out.println("</tr>");
-		
-		out.println("<tr>");
-		out.println("<td><input type='text' name='1x0' value='" + Matriz[1][0]+"'></td>");
-		out.println("<td><input type='text' name='1x1'value='" + Matriz[1][1]+"'></td>");
-		out.println("<td><input type='text' name='1x2' value='" + Matriz[1][2]+"'></td>");
-		out.println("</tr>");
-		
-		out.println("<tr>");
-		out.println("<td><input type='text' name='2x0' value='" + Matriz[2][0]+"'></td>");
-		out.println("<td><input type='text' name='2x1'value='" + Matriz[2][1]+"'></td>");
-		out.println("<td><input type='text' name='2x2' value='" + Matriz[2][2]+"'></td>");
-		out.println("</tr>");
-		
-		out.println("</tbody>");
-        
-		out.println("</table>");
-		out.println("<button type='submit' >Jogar</button>");
-		out.println("</form>");
-		out.println("</center>");
-        out.println("</body>"); 
-		
+
 		
 	}
 

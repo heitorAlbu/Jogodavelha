@@ -45,7 +45,7 @@ button{
 		</thead>
 		<tbody>
 		<tr>
-			<td><input type="text" name="0x0" id="0x0" style="text-align: center;" autocomplete="off" readonly></td> 
+			<td><input type="text" class="cachorro" name="0x0" id="0x0" style="text-align: center;" autocomplete="off" readonly></td> 
 			<td><input type="text" name="0x1" id="0x1" style="text-align: center;" autocomplete="off" readonly></td>
 			<td><input type="text" name="0x2" id="0x2" style="text-align: center;" autocomplete="off" readonly></td>
 		</tr>
@@ -64,19 +64,41 @@ button{
 	</table>
 	<br>
 	<button type="submit">Jogar</button>
+
+	<input type="text" name="vazio" id="vazio" value="vazio" style="text-align: center;" autocomplete="off" readonly hidden>
 	</form>
 	</center>
 	<script type="text/javascript">
-	var  t1 = document.getElementsByClassName("t1");
-	var  celulas = document.getElementsByTagName("input")
+	var t1 = document.getElementsByClassName("t1");
+	var celulas = document.getElementsByTagName("input")
 	var clickFlag = "";
+	var ultimajogada = "" ;		
+		window.onload = function(){
+			ultimajogada = document.getElementById("vazio");
+			var t = "";
+			for(var i = 0; 1 < celulas.length; i ++){
+				if(celulas[i].value == "O"){
+					celulas[i].classList.add("selecionadoPc");
+				}
+			}	
+		}		
 			for(var index = 0; 1 < celulas.length; index ++){
 				celulas[index].addEventListener("click", function(){
+					
 					var elemento = document.getElementById(this.id);
+					if(ultimajogada.id !== elemento.id && !this.classList.contains("selecionadoPc")){
+						ultimajogada.classList.remove("selecionado");
+						ultimajogada.value = "";
+						ultimajogada = elemento;
+					} 
 					if(!elemento.classList.contains("selecionado") && (!elemento.classList.contains("selecionadoPc"))){
+						
 						elemento.value = "X";
 						this.classList.add("selecionado")
-					}else{
+					}
+					else if(elemento.classList.contains("selecionadoPc")){
+					}
+					else{
 						this.classList.remove('selecionado')
 						elemento.value = "";
 					}
@@ -84,14 +106,14 @@ button{
 				})	
 				celulas[index].addEventListener("mouseover", function(){
 					var elemento = document.getElementById(this.id);
-					if(!elemento.classList.contains("selecionadoPc")){
+					if(!elemento.classList.contains("selecionado") && (!elemento.classList.contains("selecionadoPc"))){
 						elemento.value = 'X';
 						clickFlag = "";
 					}
 				})
 				celulas[index].addEventListener("mouseleave", function(){
 					var elemento = document.getElementById(this.id);
-					if(!elemento.classList.contains('selecionado')){
+					if(!elemento.classList.contains("selecionado") && (!elemento.classList.contains("selecionadoPc"))){
 						if(!clickFlag == "click" || clickFlag == ""){
 						elemento.value = "";
 						}
