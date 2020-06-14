@@ -32,18 +32,10 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		Regras regras = new Regras();
 		String Matriz [][] = new String[3][3];
 		List<String> jogadasDisponiveis = new   ArrayList<String>();
-		
-		String c0x0 = request.getParameter("cachorro");
-		String j0x1 = new String();
-		String j0x2 = new String();
-		String j1x0 = new String();
-		String j1x1 = new String();
-		String j1x2 = new String();
-		String j2x0 = new String();
-		String j2x1 = new String();
-		String j2x2 = new String();
-
-		
+		Boolean vitoriaPC = false;
+		Boolean vitoriaJogador = false;
+		Boolean empate = false;
+	
 		Matriz[0][0] = request.getParameter( "0x0" );
 		Matriz[0][1] = request.getParameter( "0x1" );
 		Matriz[0][2] = request.getParameter( "0x2" );
@@ -56,7 +48,61 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		
 		//String classe = request.("class").toString();
 		
-		Boolean vitoriaJogador = regras.verificaVitoria(Matriz, "X");
+	for(int i = 0; i < Matriz.length; i++) {
+			
+			for(int j = 0; j < Matriz.length; j++) {
+				
+				if(Matriz[i][j].equals("")) {
+					jogadasDisponiveis.add(Integer.toString(i)+ ","+ Integer.toString(j));
+					
+				}
+			}
+		}
+		
+	     	vitoriaJogador = regras.verificaVitoria(Matriz, "X");
+	     	vitoriaPC = regras.verificaVitoria(Matriz, "O");
+	     	Integer jogadas = jogadasDisponiveis.size();
+			empate = regras.verificaEmpate(vitoriaJogador, vitoriaPC , jogadas);
+	     
+			
+			if(empate == true) {
+				
+				out.println("<!DOCTYPE html>");
+		        out.println("<html>"); 
+		        out.println("<head>");
+		        out.println("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>");
+		        out.println("<title>Jogo da  Velha </title>");
+		        out.println("<style>");
+		        out.println("h3{");
+		        out.println("font-size: 100px;");
+		        out.println("font-family: Arial, Helvetica, sans-serif;");
+		        out.println("color:yellow;");
+		        out.println("}");
+		        out.println("button{");
+		        out.println("font-size: 40px;");
+		        out.println("border-color:#68b465;");
+		        out.println("background:linear-gradient(to bottom, #abd5aa 5%, #68b465  100%);");
+		        out.println("box-shadow:inset 0px 1px 0px 0px #e3f1e3;");
+		        out.println("text-shadow:0px 1px 0px #528009;");
+		        out.println("width: 220px;");
+		        out.println("height: 190px;");
+		        out.println("}");
+		            
+		        out.println("</style>");
+		        out.println("</head>");
+		        out.println("<body>");
+		        out.println("<center>");
+		        out.println("<h3> Empate !!! </h3>");
+		        out.println("<button ><a href='http://localhost:8080/Jogo/Home.html'> Jogar novamente </a></button>");
+		        out.println("</center>");
+		        out.println("</body>");
+		        out.println("</html>");
+		        
+		        vitoriaJogador = false;
+		        vitoriaPC = false;
+				empate = false;
+			}
+			
 		
 		 if(vitoriaJogador == true) {
 			 
@@ -78,33 +124,25 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		        out.println("box-shadow:inset 0px 1px 0px 0px #e3f1e3;");
 		        out.println("text-shadow:0px 1px 0px #528009;");
 		        out.println("width: 220px;");
-		        out.println("height: 90px;");
+		        out.println("height: 190px;");
 		        out.println("}");
 		            
 		        out.println("</style>");
 		        out.println("</head>");
 		        out.println("<body>");
 		        out.println("<center>");
-		        out.println("<h3> Parabéns, você venceu! </h3>");
+		        out.println("<h3> Você venceu! </h3>");
 		        out.println("<button ><a href='http://localhost:8080/Jogo/Home.html'> Jogar novamente </a></button>");
 		        out.println("</center>");
 		        out.println("</body>");
 		        out.println("</html>");
-			 
+		        
+		        vitoriaJogador = false;
+		        vitoriaPC = false;
+		        empate = false;
 		 }
-		
-		for(int i = 0; i < Matriz.length; i++) {
-			
-			for(int j = 0; j < Matriz.length; j++) {
-				
-				if(Matriz[i][j].equals("")) {
-					jogadasDisponiveis.add(Integer.toString(i)+ ","+ Integer.toString(j));
-					
-				}
-			}
-			
-		}
-		
+
+	
 		Collections.shuffle(jogadasDisponiveis);
 		String jogadaPC[] = new  String[2];
 		jogadaPC = jogadasDisponiveis.get(0).split(",");
@@ -112,9 +150,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		int coluna = Integer.parseInt(jogadaPC[1]); 
 		
 		Matriz[linha][coluna] = "O";
-		
-		Boolean vitoriaPC = regras.verificaVitoria(Matriz, "O");
-		
+		vitoriaPC = regras.verificaVitoria(Matriz, "O");
 		
 		if(vitoriaPC == true ) {
 			
@@ -136,20 +172,22 @@ public class JogoDaVelhaServlet extends HttpServlet {
 	        out.println("box-shadow:inset 0px 1px 0px 0px #e3f1e3;");
 	        out.println("text-shadow:0px 1px 0px #528009;");
 	        out.println("width: 220px;");
-	        out.println("height: 90px;");
+	        out.println("height: 190px;");
 	        out.println("}");
 	            
 	        out.println("</style>");
 	        out.println("</head>");
 	        out.println("<body>");
 	        out.println("<center>");
-	        out.println("<h3> Infelizmente, o computador venceu... </h3>");
+	        out.println("<h3> Perdeu... </h3>");
 	        out.println("<button ><a href='http://localhost:8080/Jogo/Home.html'> Jogar novamente </a></button>");
 	        out.println("</center>");
 	        out.println("</body>");
 	        out.println("</html>");
 	        
-	        
+	        vitoriaJogador = false;
+	        vitoriaPC = false;
+	        empate = false;
 		}
 		
 		if(vitoriaJogador == false && vitoriaPC == false) {

@@ -1,6 +1,17 @@
 package Jogo.Models;
 
+import java.util.ArrayList;
+
 public class Regras {
+	
+	
+	public Boolean verificaEmpate(Boolean vitoriaJogador, Boolean vitoriaPc, Integer jogadas) {
+		
+		if(	vitoriaJogador == false && vitoriaPc == false & jogadas == 0) {
+			return true;
+		}else
+		    return false;
+	 }
 
 	public Boolean verificaVitoria(String[][] Matriz ,  String simbolo) {
 		
