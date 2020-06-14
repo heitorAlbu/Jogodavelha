@@ -64,7 +64,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 	     	Integer jogadas = jogadasDisponiveis.size();
 			empate = regras.verificaEmpate(vitoriaJogador, vitoriaPC , jogadas);
 	     
-			
+			//EMPATE
 			if(empate == true) {
 				
 				out.println("<!DOCTYPE html>");
@@ -103,7 +103,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 				empate = false;
 			}
 			
-		
+		 //VITORIA JOGADOR
 		 if(vitoriaJogador == true) {
 			 
 				out.println("<!DOCTYPE html>");
@@ -117,7 +117,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		        out.println("font-family: Arial, Helvetica, sans-serif;");
 		        out.println("color:green;");
 		        out.println("}");
-		        out.println("button{");
+		        out.println("#botaoJn{");
 		        out.println("font-size: 40px;");
 		        out.println("border-color:#68b465;");
 		        out.println("background:linear-gradient(to bottom, #abd5aa 5%, #68b465  100%);");
@@ -132,7 +132,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		        out.println("<body>");
 		        out.println("<center>");
 		        out.println("<h3> Você venceu! </h3>");
-		        out.println("<button ><a href='http://localhost:8080/Jogo/Home.html'> Jogar novamente </a></button>");
+		        out.println("<button id='botaoJn'><a href='http://localhost:8080/Jogo/Home.html'> Jogar novamente </a></button>");
 		        out.println("</center>");
 		        out.println("</body>");
 		        out.println("</html>");
@@ -152,6 +152,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		Matriz[linha][coluna] = "O";
 		vitoriaPC = regras.verificaVitoria(Matriz, "O");
 		
+		//VITORIA PC
 		if(vitoriaPC == true ) {
 			
 			out.println("<!DOCTYPE html>");
@@ -165,7 +166,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 	        out.println("font-family: Arial, Helvetica, sans-serif;");
 	        out.println("color:red;");
 	        out.println("}");
-	        out.println("button{");
+	        out.println("#botaoJn{");
 	        out.println("font-size: 40px;");
 	        out.println("border-color:#68b465;");
 	        out.println("background:linear-gradient(to bottom, #abd5aa 5%, #68b465  100%);");
@@ -180,7 +181,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 	        out.println("<body>");
 	        out.println("<center>");
 	        out.println("<h3> Perdeu... </h3>");
-	        out.println("<button ><a href='http://localhost:8080/Jogo/Home.html'> Jogar novamente </a></button>");
+	        out.println("<button id='botaoJn'><a href='http://localhost:8080/Jogo/Home.html'> Jogar novamente </a></button>");
 	        out.println("</center>");
 	        out.println("</body>");
 	        out.println("</html>");
@@ -189,8 +190,8 @@ public class JogoDaVelhaServlet extends HttpServlet {
 	        vitoriaPC = false;
 	        empate = false;
 		}
-		
-		if(vitoriaJogador == false && vitoriaPC == false) {
+		// JOGO ACONTECENDO
+		if(vitoriaJogador == false && vitoriaPC == false && empate == false) {
 			out.println("<!DOCTYPE html>");
 	        out.println("<html>"); 
 	        out.println("<head>");
@@ -199,13 +200,20 @@ public class JogoDaVelhaServlet extends HttpServlet {
 	        out.println("<title>Jogo da  Velha </title>");
 	        
 	        out.println("<style>");
+	        
 	        out.println(".selecionadoPc{");
 	        out.println("color: red;");
 	        out.println("}");
+	        
+	        out.println(".selecionadoAnterior{");
+	        out.println("color:green;");
+	        out.println("}");
+	        
 	        out.println("h3{");
 	        out.println("font-size: 100px;");
 	        out.println("font-family: Arial, Helvetica, sans-serif;");
 	        out.println("}");
+	        
 	        out.println("input{");
 	        out.println("border-radius:20px;");
 	        out.println("background: #d0f5cd;");
@@ -213,6 +221,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 	        out.println("height: 150px;");
 	        out.println("font-size:100px;");
 	        out.println("}");
+	        
 	        out.println("button{");
 	        out.println("font-size: 40px;");
 	        out.println("border-color:#68b465;");
@@ -222,6 +231,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 	        out.println("width: 120px;");
 	        out.println("height: 60px;");
 	        out.println("}");
+	        
 	        out.println("</style>");
 	       
 	        
@@ -270,7 +280,17 @@ public class JogoDaVelhaServlet extends HttpServlet {
 			out.println("</tbody>");
 	        
 			out.println("</table>");
-			out.println("<button type='submit' >Jogar</button>");
+			Boolean VJ = regras.verificaVitoria(Matriz, "X");
+			Boolean VPC = regras.verificaVitoria(Matriz, "O");
+			Boolean E = regras.verificaEmpate(VJ, VPC, jogadas);
+			
+			if(VJ == false && VPC == false && E == false) 
+			{
+				out.println("<button type='submit' >Jogar</button>");		
+			}else {
+			
+			} 
+			
 			
 			out.println("<input type='text' name='vazio' id='vazio' value='vazio' style='text-align: center;' autocomplete='off' readonly hidden>");
 			out.println("</form>");
@@ -278,53 +298,74 @@ public class JogoDaVelhaServlet extends HttpServlet {
 			
 			 
 	        out.println("<script type='text/javascript'>");
+	        
 	        out.println("var t1 = document.getElementsByClassName('t1');");
 	        out.println("var celulas = document.getElementsByTagName('input')");
 	        out.println("var clickFlag = '';");
 	        out.println("var ultimajogada ='' ;");
-	        out.println("window.onload = function(){");
-	        out.println("ultimajogada = document.getElementById('vazio');");
-	        out.println("for(var i = 0; 1 < celulas.length; i ++){");
-	        out.println("if(celulas[i].value == 'O'){");
-	        out.println("celulas[i].classList.add('selecionadoPc');");
+	        
+	        	out.println("window.onload = function(){");
+	        		out.println("ultimajogada = document.getElementById('vazio');");
+	        		
+	        		out.println("for(var i = 0; 1 < celulas.length; i ++){");
+	        			out.println("if(celulas[i].value == 'O'){");
+	        				out.println("celulas[i].classList.add('selecionadoPc');");
+	        			out.println("}");
+	        			
+	        			out.println("if(celulas[i].value == 'X'){");
+	        				out.println("celulas[i].classList.add('selecionado');");
+	        			out.println("}");
+	        			
+	        			out.println("if(celulas[i].value == 'X'){");
+	        				out.println("celulas[i].classList.add('selecionadoAnterior');");
+	        			out.println("}");
+	                out.println("}");
 	        out.println("}");
-	        out.println("if(celulas[i].value == 'X'){");
-	        out.println("celulas[i].classList.add('selecionado');");
-	        out.println("}");
-	        out.println("}");
-	        out.println("}");
-	        out.println("for(var index = 0; 1 < celulas.length; index ++){");
-	        out.println("celulas[index].addEventListener('click', function(){");
-	        out.println("var elemento = document.getElementById(this.id);");
-	        out.println("if(ultimajogada.id !== elemento.id && !this.classList.contains('selecionadoPc')){");
-	        out.println("ultimajogada.classList.remove('selecionado');");
-	        out.println("ultimajogada.value ='';");
-	        out.println("ultimajogada = elemento;");
-	        out.println("}");
-	        out.println("if(!elemento.classList.contains('selecionado') && (!elemento.classList.contains('selecionadoPc'))){");
-	        out.println("elemento.value = 'X';");
-	        out.println("this.classList.add('selecionado')");
-	        out.println("}");
-	        out.println("else if(elemento.classList.contains('selecionadoPc')){}");
-	        out.println("else{");
-	        out.println("this.classList.remove('selecionado')");
-	        out.println("elemento.value = '';");
-	        out.println("}");
+	        
+	        
+	        	out.println("for(var index = 0; 1 < celulas.length; index ++){");
+	        		out.println("celulas[index].addEventListener('click', function(){");
+	        			out.println("var elemento = document.getElementById(this.id);");
+	        
+	        			out.println("if(ultimajogada.id !== elemento.id && !this.classList.contains('selecionadoPc') && !this.classList.contains('selecionadoAnterior')){");
+	        				out.println("ultimajogada.classList.remove('selecionado');");
+	        				out.println("ultimajogada.value ='';");
+	        				out.println("ultimajogada = elemento;");
+	        				out.println("}");
+	        				
+	        			out.println("if(!elemento.classList.contains('selecionado') && (!elemento.classList.contains('selecionadoPc'))){");
+	        				out.println("elemento.value = 'X';");
+	        				out.println("this.classList.add('selecionado')");
+	        			out.println("}");
+	        			
+	        			out.println("else if(elemento.classList.contains('selecionadoPc')){}");
+	        			
+	        			out.println("else if(elemento.classList.contains('selecionadoAnterior')){}");
+	        			
+	        			out.println("else if(elemento.classList.contains('selecionado') && (!elemento.classList.contains('selecionadoAnterior'))){");
+	        				out.println("this.classList.remove('selecionado')");
+	        				out.println("elemento.value = '';");
+	        			out.println("}");
+	        			
 	        out.println("clickFlag = 'click';");
 	        out.println("})");
+	        
 	        out.println("celulas[index].addEventListener('mouseover', function(){");
-	        out.println("var elemento = document.getElementById(this.id);");
-	        out.println("if(!elemento.classList.contains('selecionado') && (!elemento.classList.contains('selecionadoPc'))){");
-	        out.println("elemento.value = 'X';");
-	        out.println("}");
+	        	out.println("var elemento = document.getElementById(this.id);");
+	        	out.println("if(!elemento.classList.contains('selecionado') && (!elemento.classList.contains('selecionadoPc'))){");
+	        	out.println("elemento.value = 'X';");
+	        	out.println("}");
+	        	
 	        out.println("clickFlag = '';");
 	        out.println("})");
+	        
 	        out.println("celulas[index].addEventListener('mouseleave', function(){");
-	        out.println("var elemento = document.getElementById(this.id);");
-	        out.println("if(!elemento.classList.contains('selecionado') && (!elemento.classList.contains('selecionadoPc'))){");
-	        out.println("if(!clickFlag == 'click' || clickFlag == ''){");
-	        out.println("elemento.value = '';");
+	        	out.println("var elemento = document.getElementById(this.id);");
+	        	out.println("if(!elemento.classList.contains('selecionado') && (!elemento.classList.contains('selecionadoPc'))){");
+	        	out.println("if(!clickFlag == 'click' || clickFlag == ''){");
+	        	out.println("elemento.value = '';");
 	        out.println("}");
+	        
 	        out.println("}");
 	        out.println("})");
 	        out.println("}");
@@ -336,13 +377,9 @@ public class JogoDaVelhaServlet extends HttpServlet {
 			
 	        out.println("</body>"); 
 	        out.println("</html>"); 
-			
-			
+						
 		}
-		
-
-		
-	}
+}
 
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
