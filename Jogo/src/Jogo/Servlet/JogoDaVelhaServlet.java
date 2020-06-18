@@ -31,7 +31,7 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Regras regras = new Regras();
 		String Matriz [][] = new String[3][3];
-		List<String> jogadasDisponiveis = new   ArrayList<String>();
+		List<String> jogadasDisponiveis = new ArrayList<String>();
 		Boolean vitoriaPC = false;
 		Boolean vitoriaJogador = false;
 		Boolean empate = false;
@@ -45,8 +45,6 @@ public class JogoDaVelhaServlet extends HttpServlet {
 		Matriz[2][0] = request.getParameter( "2x0" );
 		Matriz[2][1] = request.getParameter( "2x1" );
 		Matriz[2][2] = request.getParameter( "2x2" );
-		
-		//String classe = request.("class").toString();
 		
 	for(int i = 0; i < Matriz.length; i++) {
 			
@@ -370,9 +368,6 @@ public class JogoDaVelhaServlet extends HttpServlet {
 	        out.println("})");
 	        out.println("}");
 	      
-	        
-	        
-	        
 	        out.println("</script>");
 			
 	        out.println("</body>"); 
